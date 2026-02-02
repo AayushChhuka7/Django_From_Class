@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% block content %}
+<ul>
+  <!-- <li><a href="/challenges/{{months.0}}">{{months.0|title}}</a></li>
+      <li><a href="/challenges/{{months.1}}">{{months.1|title}}</a></li>
+      <li><a href="/challenges/{{months.2}}">{{months.2|title}}</a></li>
+      <li><a href="/challenges/{{months.3}}">{{months.3|title}}</a></li>
+      <li><a href="/challenges/{{months.4}}">{{months.4|title}}</a></li>
+      <li><a href="/challenges/{{months.5}}">{{months.5|title}}</a></li>
+      <li><a href="/challenges/{{months.6}}">{{months.6|title}}</a></li>
+      <li><a href="/challenges/{{months.7}}">{{months.7|title}}</a></li>
+      <li><a href="/challenges/{{months.8}}">{{months.8|title}}</a></li>
+      <li><a href="/challenges/{{months.9}}">{{months.9|title}}</a></li>
+      <li><a href="/challenges/{{months.10}}">{{months.10|title}}</a></li>
+      <li><a href="/challenges/{{months.11}}">{{months.11|title}}</a></li> -->
+  {% for month in months %}
+  <!-- <li><a href="/app/{{month}}">{{month|title}}</a></li> -->
+  <li><a href="{% url 'monthly-challange' month %}">{{month|title}}</a></li>
+  {% endfor %}
+</ul>
+{% endblock content%}
