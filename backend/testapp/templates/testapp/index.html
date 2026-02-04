@@ -1,6 +1,16 @@
-{% extends "base.html" %} {% block content %}
-<ul>
-  <!-- <li><a href="/challenges/{{months.0}}">{{months.0|title}}</a></li>
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'testapp/css/challange.css' %}" />
+  </head>
+
+  <body>
+    <ul>
+      <!-- <li><a href="/challenges/{{months.0}}">{{months.0|title}}</a></li>
       <li><a href="/challenges/{{months.1}}">{{months.1|title}}</a></li>
       <li><a href="/challenges/{{months.2}}">{{months.2|title}}</a></li>
       <li><a href="/challenges/{{months.3}}">{{months.3|title}}</a></li>
@@ -12,9 +22,11 @@
       <li><a href="/challenges/{{months.9}}">{{months.9|title}}</a></li>
       <li><a href="/challenges/{{months.10}}">{{months.10|title}}</a></li>
       <li><a href="/challenges/{{months.11}}">{{months.11|title}}</a></li> -->
-  {% for month in months %}
-  <!-- <li><a href="/app/{{month}}">{{month|title}}</a></li> -->
-  <li><a href="{% url 'monthly-challange' month %}">{{month|title}}</a></li>
-  {% endfor %}
-</ul>
-{% endblock content%}
+      {% for month in months %}
+      <!-- <li><a href="/app/{{month}}">{{month|title}}</a></li> -->
+      <li><a href="{% url 'monthly-challange' month %}">{{month|title}}</a></li>
+      {% endfor %}
+    </ul>
+    
+  </body>
+</html>
