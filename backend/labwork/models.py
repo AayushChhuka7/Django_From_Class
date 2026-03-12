@@ -1,19 +1,16 @@
 from django.db import models
 
-
 class Registration(models.Model):
     GENDER_CHOICES = [
         ('M', 'Male'),
         ('F', 'Female'),
         ('O', 'Other'),
     ]
-
     HOBBY_CHOICES = [
         ('football', 'Football'),
         ('tableTennis', 'Table Tennis'),
         ('basketball', 'Basketball'),
     ]
-
     COUNTRY_CHOICES = [
         ('', '-- Select --'),
         ('Nepal', 'Nepal'),

@@ -4,10 +4,8 @@ from django.contrib.auth.hashers import make_password
 from .models import Registration
 import re
 
-
 class RegistrationSerializer(serializers.Serializer):
     """Registration serializer with comprehensive validation"""
-
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(
         max_length=100,
@@ -74,7 +72,6 @@ class RegistrationSerializer(serializers.Serializer):
             raise serializers.ValidationError(
                 f'Unsupported file format. Allowed: {", ".join(allowed_extensions)}'
             )
-
         max_size = 2 * 1024 * 1024  # 2MB in bytes
         if value.size > max_size:
             raise serializers.ValidationError(
@@ -105,12 +102,10 @@ class RegistrationSerializer(serializers.Serializer):
         """Validate confirm password matches password"""
         password = data.get('password')
         confirm_password = data.get('confirm_password')
-
         if password != confirm_password:
             raise serializers.ValidationError({
                 'confirm_password': 'Confirm Password did not match Password'
             })
-
         return data
 
     def create(self, validated_data):

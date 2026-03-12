@@ -8,6 +8,7 @@ from .models import Registration
 class RegistrationView(APIView):
     parser_classes = [MultiPartParser, FormParser]
 
+    
     def post(self, request):
         serializer = RegistrationSerializer(data=request.data)
         if serializer.is_valid():
