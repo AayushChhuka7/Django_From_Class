@@ -1,25 +1,31 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.parsers import MultiPartParser, FormParser
-from .serializers import RegistrationSerializer
-from .models import Registration
+from rest_framework_simplejwt.tokens import RefreshToken
+from .models import Student
 
-class RegistrationView(APIView):
-    parser_classes = [MultiPartParser, FormParser]
-
-    
+class StudentLoginView(APIView):
     def post(self, request):
-        serializer = RegistrationSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({
-                'message': 'Form submitted successfully!',
-                'data': serializer.data
-            }, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        username = request.data.get('username')
+        password = request.data.get('password')
 
-    def get(self, request):
-        registrations = Registration.objects.all()
-        serializer = RegistrationSerializer(registrations, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        try:
+            # Look up student by username
+            student = Student.objects.get(username=username)
+            
+            # Check if provided password matches the hashed password in DB
+            if student.check_password(password):
+                refresh = RefreshToken.for_user(student)
+                return Response({
+                    'refresh': str(refresh),
+                    'access': str(refresh.access_token),
+                }, status=status.HTTP_200_OK)
+        
+        except Student.DoesNotExist:
+            pass
+
+        # Return error if credentials fail
+        return Response(
+            {"error": "Invalid username/password"},
+            status=status.HTTP_401_UNAUTHORIZED
+        )
